@@ -14,16 +14,14 @@ weatherForm.addEventListener("submit", (e) => {
   messageTwo.textContent = "";
 
   fetch(
-    "http://api.weatherstack.com/current?access_key=9493670eab2987265927ec51357e61a8&query=" +
-      location +
-      "&units=f"
+    "http://localhost:3000/weather?address=" + encodeURIComponent(location)
   ).then((response) => {
     response.json().then((data) => {
       if (data.error) {
         messageOne.textContent = data.error;
       } else {
-        messageOne.textContent = data.current.temperature;
-        messageTwo.textContent = data.current.weather_descriptions;
+        messageOne.textContent = data.temperature;
+        messageTwo.textContent = data.description;
         console.log(data);
       }
     });
